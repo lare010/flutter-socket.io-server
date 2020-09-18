@@ -8,6 +8,7 @@
   <body>
     <h1>Acceso Denegado</h1>
     <script src="socket.io/socket.io.js"></script>
+
     <script>
       var socket = io();
       socket.on("connect", function () {
@@ -18,9 +19,19 @@
         console.log("perdimos la conexion");
       });
 
-      socket.emit("mensaje", { nombre: "luis" });
+      // socket.emit("mensaje", { nombre: "luis" });
+
       socket.on("mensaje", function (payload) {
         console.log("Escuhando:", payload);
+      });
+
+      socket.on("nuevo-mensaje", function (payload) {
+        console.log("mesaje escuchado:", payload);
+      });
+
+      socket.on("active-bands", function (bans) {
+        console.clear();
+        console.table(bans);
       });
     </script>
   </body>
